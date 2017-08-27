@@ -1,0 +1,10 @@
+      SUBROUTINE MAPITM (XLAT,XLON,IFST,IAM,XCS,YCS,MCS,IAI,IAG,MAI,LPR)
+      REAL    XLAT,XLON
+      INTEGER IFST,IAM(*),MCS,IAI(*),IAG(*),MAI
+      REAL    XCS(*),YCS(*)
+      IF (ICFELL('MAPITM - UNCLEARED PRIOR ERROR',1).NE.0) RETURN
+      CALL MDPITM (DBLE(XLAT),DBLE(XLON),IFST,IAM,XCS,YCS,MCS,IAI,IAG,
+     +                                                        MAI,LPR)
+      IF (ICFELL('MAPITM',2).NE.0) RETURN
+      RETURN
+      END

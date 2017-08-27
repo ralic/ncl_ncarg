@@ -1,0 +1,270 @@
+      SUBROUTINE VTSETR (WHCH,RVAL)
+C
+      CHARACTER*(*) WHCH
+C
+C This subroutine is called to set the real value of a specified
+C parameter.
+C
+C WHCH is the name of the parameter whose value is to be set.
+C
+C RVAL is a real variable containing the new value of the parameter.
+C
+C
+C Declare all of the VASPACKT common blocks.
+C
+C
+C VTCOM1 contains integer and real variables.
+C
+      COMMON /VTCOM1/ AHAW,AHLN,AHLR,AHSP,AHSR
+      COMMON /VTCOM1/ ANIL,ANM1,ANM2,ANZF,AVEL,CHWM,CXIL,CXZF
+      COMMON /VTCOM1/ CYIL,CYZF,DCNU,DCNV,DCNW,DMAX
+      COMMON /VTCOM1/ DMIN,DVAL  !  REUSE FOR FLOWMIN AND FLOWMAX?
+      COMMON /VTCOM1/ EMAX,EPSI
+      COMMON /VTCOM1/ IBIL,IBZF,ICIL,ICLR(255)
+      COMMON /VTCOM1/ ICSG,ICST,ICTT,ICTV,ICZF,IDBG,IISP
+      COMMON /VTCOM1/ IIWS(2),IIWU,ILBC,IMPF
+      COMMON /VTCOM1/ INIL  !  NEEDED? (INFORMATIONAL LABEL INDEX)
+      COMMON /VTCOM1/ INIT,IPAI,IPIS
+      COMMON /VTCOM1/ IPIL,IPZF,IRNG,IRWS(2),IRWU,ISET,ISTA(625)
+      COMMON /VTCOM1/ ISVT,ITBM,IWSO,IZFF,JODP,JOMA
+      COMMON /VTCOM1/ JOTZ,LCTM,LEA1,LEA2,LEA3,LEE1,LEE2,LEE3
+      COMMON /VTCOM1/ LIWB,LIWK,LIWS(2),LNLG
+      COMMON /VTCOM1/ LOEN,LOPN,LOTN
+      COMMON /VTCOM1/ LRWK,LRWS(2)
+      COMMON /VTCOM1/ LSDD,LSDL,LSDM,LTIL,LTZF,MIRO,NCLR
+      COMMON /VTCOM1/ NDGL,NEDG,NEXL,NEXT,NEXU
+      COMMON /VTCOM1/ NLBS  !  NEEDED? (NUMBER OF LABELS)
+      COMMON /VTCOM1/ NLSD,NLZF,NOMF,NPNT
+      COMMON /VTCOM1/ NR04  !  NEEDED? (LABEL-LIST MANAGEMENT)
+      COMMON /VTCOM1/ NSDL,NSDR,NTRI,OORV,PCPX,PCPY,PCPZ
+      COMMON /VTCOM1/ PITH  !  NEEDED? (STREAMLINE INTERPOLATION)
+      COMMON /VTCOM1/ SCFS,SCFU  !  NEEDED? (SCALE FACTORS)
+      COMMON /VTCOM1/ SLLN,SLLR,SLPS,SLPR,SLSP,SLSR,SVSP,SVSR
+      COMMON /VTCOM1/ TTLL,TTLR,TTSP,TTSR,TVAL(0:256)
+      COMMON /VTCOM1/ UVPB,UVPL,UVPR,UVPS,UVPT,UWDB,UWDL
+      COMMON /VTCOM1/ UWDR,UWDT,VFRA,VRLN,VRLR,VRMG,VRMR
+      COMMON /VTCOM1/ VVMM
+      COMMON /VTCOM1/ WCIL,WCZF,WLIL,WLZF
+      COMMON /VTCOM1/ WWIL,WWZF
+      COMMON /VTCOM1/ XLBC,XMAX,XMIN,XVPL,XVPR,XWDL,XWDR
+      COMMON /VTCOM1/ YLBC,YMAX,YMIN,YVPB,YVPT,YWDB,YWDT,ZMAX,ZMIN
+C
+      EQUIVALENCE (IIWS(1),II01),(LIWS(1),LI01)
+      EQUIVALENCE (IIWS(2),II02),(LIWS(2),LI02)
+      EQUIVALENCE (IRWS(1),IR01),(LRWS(1),LR01)
+      EQUIVALENCE (IRWS(2),IR02),(LRWS(2),LR02)
+      SAVE   /VTCOM1/
+C
+C VTCOM2 holds character parameters.
+C
+      COMMON /VTCOM2/ CHEX,CTMA,CTMB,FRMT
+      COMMON /VTCOM2/ TXIL,TXZF
+      CHARACTER*13 CHEX
+      CHARACTER*500 CTMA,CTMB
+      CHARACTER*8 FRMT
+      CHARACTER*128 TXIL
+      CHARACTER*64 TXZF
+      SAVE   /VTCOM2/
+C
+      INTEGER ISHIFT
+C
+C Check for an uncleared prior error.
+C
+      IF (ICFELL('VTSETR - UNCLEARED PRIOR ERROR',1).NE.0) RETURN
+C
+C Check for a parameter name that is too short.
+C
+      IF (LEN(WHCH).LT.3) THEN
+        CTMB(1:36)='VTSETR - PARAMETER NAME TOO SHORT - '
+        CTMB(37:36+LEN(WHCH))=WHCH
+        CALL SETER (CTMB(1:36+LEN(WHCH)),2,1)
+        RETURN
+      END IF
+C
+C Check for incorrect use of the index parameter.
+C
+      IF (WHCH(1:3).EQ.'CLR'.OR.WHCH(1:3).EQ.'clr'.OR.WHCH(1:3).EQ.'TVL'
+     +.OR.WHCH(1:3).EQ.'tvl') THEN
+        IF (IPAI.LT.1.OR.IPAI.GT.NCLR) THEN
+          GO TO 10002
+        END IF
+      END IF
+C
+      GO TO 10003
+10002 CONTINUE
+        CTMB(1:36)='VTSETR - SETTING XXX - PAI INCORRECT'
+        CTMB(18:20)=WHCH(1:3)
+        CALL SETER (CTMB(1:36),3,1)
+        RETURN
+10003 CONTINUE
+C
+C
+C Set the appropriate parameter value.
+C
+      IF (WHCH(1:3).EQ.'AHA'.OR.WHCH(1:3).EQ.'aha') THEN
+        AHAW=MAX(1.,MIN(90.,RVAL))
+      ELSE IF (WHCH(1:3).EQ.'AHL'.OR.WHCH(1:3).EQ.'ahl') THEN
+        AHLN=RVAL
+      ELSE IF (WHCH(1:3).EQ.'AHS'.OR.WHCH(1:3).EQ.'ahs') THEN
+        AHSP=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'AM1'.OR.WHCH(1:3).EQ.'am1') THEN
+        ANM1=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'AM2'.OR.WHCH(1:3).EQ.'am2') THEN
+        ANM2=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'CLR'.OR.WHCH(1:3).EQ.'clr') THEN
+        ICLR(IPAI)=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'CTV'.OR.WHCH(1:3).EQ.'ctv') THEN
+        ICTV=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'CWM'.OR.WHCH(1:3).EQ.'cwm') THEN
+        CHWM=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'DBG'.OR.WHCH(1:3).EQ.'dbg') THEN
+        IDBG=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'DVA'.OR.WHCH(1:3).EQ.'dva') THEN
+        DVAL=RVAL
+      ELSE IF (WHCH(1:3).EQ.'ILA'.OR.WHCH(1:3).EQ.'ila') THEN
+        ANIL=RVAL
+      ELSE IF (WHCH(1:3).EQ.'ILB'.OR.WHCH(1:3).EQ.'ilb') THEN
+        IBIL=MAX(0,MIN(3,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'ILC'.OR.WHCH(1:3).EQ.'ilc') THEN
+        ICIL=MAX(-1,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'ILL'.OR.WHCH(1:3).EQ.'ill') THEN
+        WLIL=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ILP'.OR.WHCH(1:3).EQ.'ilp') THEN
+        IPIL=MAX(-4,MIN(4,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'ILS'.OR.WHCH(1:3).EQ.'ils') THEN
+        WCIL=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ILW'.OR.WHCH(1:3).EQ.'ilw') THEN
+        WWIL=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ILX'.OR.WHCH(1:3).EQ.'ilx') THEN
+        CXIL=RVAL
+      ELSE IF (WHCH(1:3).EQ.'ILY'.OR.WHCH(1:3).EQ.'ily') THEN
+        CYIL=RVAL
+      ELSE IF (WHCH(1:3).EQ.'ISP'.OR.WHCH(1:3).EQ.'isp') THEN
+        IISP=MAX(0,MIN(1,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'IWB'.OR.WHCH(1:3).EQ.'iwb') THEN
+        LIWB=MAX(1,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'LBC'.OR.WHCH(1:3).EQ.'lbc') THEN
+        ILBC=MAX(-1,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'MAP'.OR.WHCH(1:3).EQ.'map') THEN
+        IMPF=MAX(0,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'NEL'.OR.WHCH(1:3).EQ.'nel') THEN
+        NEXL=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'NET'.OR.WHCH(1:3).EQ.'net') THEN
+        NEXT=MAX(0,MIN(2,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'NEU'.OR.WHCH(1:3).EQ.'neu') THEN
+        NEXU=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'NLS'.OR.WHCH(1:3).EQ.'nls') THEN
+        NLSD=MAX(0,MIN(1,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'NLV'.OR.WHCH(1:3).EQ.'nlv') THEN
+        NCLR=MAX(0,MIN(255,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'NLZ'.OR.WHCH(1:3).EQ.'nlz') THEN
+        NLZF=MAX(0,MIN(1,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'NOF'.OR.WHCH(1:3).EQ.'nof') THEN
+        NOMF=MAX(0,MIN(7,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'NSD'.OR.WHCH(1:3).EQ.'nsd') THEN
+        NSDL=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ORV'.OR.WHCH(1:3).EQ.'orv') THEN
+        OORV=RVAL
+      ELSE IF (WHCH(1:3).EQ.'PAI'.OR.WHCH(1:3).EQ.'pai') THEN
+        IPAI=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'PCX'.OR.WHCH(1:3).EQ.'pcx') THEN
+        PCPX=RVAL
+      ELSE IF (WHCH(1:3).EQ.'PCY'.OR.WHCH(1:3).EQ.'pcy') THEN
+        PCPY=RVAL
+      ELSE IF (WHCH(1:3).EQ.'PCZ'.OR.WHCH(1:3).EQ.'pcz') THEN
+        PCPZ=RVAL
+      ELSE IF (WHCH(1:3).EQ.'PIS'.OR.WHCH(1:3).EQ.'pis') THEN
+        IPIS=INT(RVAL)
+      ELSE IF (WHCH(1:3).EQ.'PIT'.OR.WHCH(1:3).EQ.'pit') THEN
+        PITH=RVAL
+      ELSE IF (WHCH(1:3).EQ.'RNG'.OR.WHCH(1:3).EQ.'rng') THEN
+        IRNG=MAX(0,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'SET'.OR.WHCH(1:3).EQ.'set') THEN
+        ISET=MAX(0,MIN(1,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'SFS'.OR.WHCH(1:3).EQ.'sfs'.OR.WHCH(1:3).EQ.
+     +'SFU'.OR.WHCH(1:3).EQ.'sfu') THEN
+        SCFS=RVAL
+      ELSE IF (WHCH(1:3).EQ.'SGC'.OR.WHCH(1:3).EQ.'sgc') THEN
+        ICSG=MAX(0,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'SLL'.OR.WHCH(1:3).EQ.'sll') THEN
+        SLLN=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'SLP'.OR.WHCH(1:3).EQ.'slp') THEN
+        SLPS=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'SLS'.OR.WHCH(1:3).EQ.'sls') THEN
+        SLSP=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'SVS'.OR.WHCH(1:3).EQ.'svs') THEN
+        SVSP=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'STC'.OR.WHCH(1:3).EQ.'stc') THEN
+        ICST=MAX(0,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'SVT'.OR.WHCH(1:3).EQ.'svt') THEN
+        ISVT=MAX(0,MIN(10,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'TBA'.OR.WHCH(1:3).EQ.'tba') THEN
+        ITBM=IOR(ISHIFT(ISHIFT(ITBM,-12),12),IAND(INT(RVAL),4095))
+      ELSE IF (WHCH(1:3).EQ.'TBX'.OR.WHCH(1:3).EQ.'tbx') THEN
+        ITBM=IOR(ISHIFT(IAND(INT(RVAL),4095),12),IAND(ITBM,4095))
+      ELSE IF (WHCH(1:3).EQ.'TTC'.OR.WHCH(1:3).EQ.'ttc') THEN
+        ICTT=MAX(0,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'TTL'.OR.WHCH(1:3).EQ.'ttl') THEN
+        TTLL=RVAL
+      ELSE IF (WHCH(1:3).EQ.'TTS'.OR.WHCH(1:3).EQ.'tts') THEN
+        TTSP=RVAL
+      ELSE IF (WHCH(1:3).EQ.'TVL'.OR.WHCH(1:3).EQ.'tvl') THEN
+        TVAL(IPAI)=RVAL
+      ELSE IF (WHCH(1:3).EQ.'VFR'.OR.WHCH(1:3).EQ.'vfr') THEN
+        VFRA=MAX(0.,MIN(1.,RVAL))
+      ELSE IF (WHCH(1:3).EQ.'VPB'.OR.WHCH(1:3).EQ.'vpb') THEN
+        UVPB=MAX(0.,MIN(1.,RVAL))
+      ELSE IF (WHCH(1:3).EQ.'VPL'.OR.WHCH(1:3).EQ.'vpl') THEN
+        UVPL=MAX(0.,MIN(1.,RVAL))
+      ELSE IF (WHCH(1:3).EQ.'VPR'.OR.WHCH(1:3).EQ.'vpr') THEN
+        UVPR=MAX(0.,MIN(1.,RVAL))
+      ELSE IF (WHCH(1:3).EQ.'VPS'.OR.WHCH(1:3).EQ.'vps') THEN
+        UVPS=RVAL
+      ELSE IF (WHCH(1:3).EQ.'VPT'.OR.WHCH(1:3).EQ.'vpt') THEN
+        UVPT=MAX(0.,MIN(1.,RVAL))
+      ELSE IF (WHCH(1:3).EQ.'VRL'.OR.WHCH(1:3).EQ.'vrl') THEN
+        VRLN=RVAL
+      ELSE IF (WHCH(1:3).EQ.'VRM'.OR.WHCH(1:3).EQ.'vrm') THEN
+        VRMG=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'VVM'.OR.WHCH(1:3).EQ.'vvm') THEN
+        VVMM=RVAL
+      ELSE IF (WHCH(1:3).EQ.'WDB'.OR.WHCH(1:3).EQ.'wdb') THEN
+        UWDB=RVAL
+      ELSE IF (WHCH(1:3).EQ.'WDL'.OR.WHCH(1:3).EQ.'wdl') THEN
+        UWDL=RVAL
+      ELSE IF (WHCH(1:3).EQ.'WDR'.OR.WHCH(1:3).EQ.'wdr') THEN
+        UWDR=RVAL
+      ELSE IF (WHCH(1:3).EQ.'WDT'.OR.WHCH(1:3).EQ.'wdt') THEN
+        UWDT=RVAL
+      ELSE IF (WHCH(1:3).EQ.'WSO'.OR.WHCH(1:3).EQ.'wso') THEN
+        IWSO=MAX(0,MIN(3,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'ZFA'.OR.WHCH(1:3).EQ.'zfa') THEN
+        ANZF=RVAL
+      ELSE IF (WHCH(1:3).EQ.'ZFB'.OR.WHCH(1:3).EQ.'zfb') THEN
+        IBZF=MAX(0,MIN(3,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'ZFC'.OR.WHCH(1:3).EQ.'zfc') THEN
+        ICZF=MAX(-1,INT(RVAL))
+      ELSE IF (WHCH(1:3).EQ.'ZFL'.OR.WHCH(1:3).EQ.'zfl') THEN
+        WLZF=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ZFS'.OR.WHCH(1:3).EQ.'zfs') THEN
+        WCZF=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ZFP'.OR.WHCH(1:3).EQ.'zfp') THEN
+        IPZF=MAX(-4,MIN(4,INT(RVAL)))
+      ELSE IF (WHCH(1:3).EQ.'ZFW'.OR.WHCH(1:3).EQ.'zfw') THEN
+        WWZF=MAX(0.,RVAL)
+      ELSE IF (WHCH(1:3).EQ.'ZFX'.OR.WHCH(1:3).EQ.'zfx') THEN
+        CXZF=RVAL
+      ELSE IF (WHCH(1:3).EQ.'ZFY'.OR.WHCH(1:3).EQ.'zfy') THEN
+        CYZF=RVAL
+      ELSE
+        CTMB(1:36)='VTSETR - PARAMETER NAME NOT KNOWN - '
+        CTMB(37:39)=WHCH(1:3)
+        CALL SETER (CTMB(1:39),4,1)
+        RETURN
+      END IF
+C
+C Done.
+C
+      RETURN
+C
+      END

@@ -1,0 +1,871 @@
+#########################################################################
+#                                                                       #
+#       This Makefile was created by the "ymake" utility.               #
+#       If you wish to make changes in the "Makefile" or "makefile",    #
+#       do so by making changes to "yMakefile" or "ymakefile"           #
+#       and executing "make local-Makefile".                            #
+#                                                                       #
+#########################################################################
+
+# ########################################################################
+#
+# In main Template
+#
+# ########################################################################
+
+SYSTEM_INCLUDE		= "Darwin_Intel"
+DATE                    = $(shell date +%d%b%Y_%H%M)
+
+OS1_DEF		=	-DDarwin
+OS2_DEF		=
+OS_DEF		=	$(OS1_DEF) $(OS2_DEF)
+ARCH_DEF	=	-Dx86_64
+VENDOR_DEF	=	-DApple
+
+MAJOR_DEF	=	-DMAJOR=17
+MINOR_DEF	=	-DMINOR=0
+
+SUBMINOR_DEF	=	-DSUBMINOR=0
+
+# ########################################################################
+#
+# Including Site - first time
+#
+# ########################################################################
+
+# ########################################################################
+#
+# After Including Site - first time
+#
+# ########################################################################
+
+# ########################################################################
+#
+# Including "Darwin_Intel"
+#
+# ########################################################################
+
+FC = $(F77)
+
+# ########################################################################
+#
+# After Including "Darwin_Intel"
+#
+# ########################################################################
+
+# ########################################################################
+#
+# Including Site - second time
+#
+# ########################################################################
+
+# ########################################################################
+#
+# After Including Site - second time
+#
+# ########################################################################
+
+YMAKEROOT		= /usr/local/Cellar/ncl_ncarg/6.4.0
+BINROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/bin
+LIBROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/lib
+INCROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/include
+MANROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/man
+TMPROOT			= /tmp
+
+ROOTPATH		= /usr/local/Cellar/ncl_ncarg/6.4.0
+BINPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/bin
+LIBPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/lib
+INCPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/include
+MANPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/man
+
+LIBSEARCH		= -L/opt/X11/lib
+INCSEARCH		= -I/opt/X11/include
+LIBSEARCHUSER		= -L/opt/X11/lib
+INCSEARCHUSER		= -I/opt/X11/include
+PYTHONVERSION		=
+PYTHONLIBSEARCH		=
+PYTHONINCSEARCH		=
+PYTHONPKGSDIR           =
+PYTHONBINDIR            =
+
+LIB_SEARCH		= $(LIBSEARCH)
+INC_SEARCH		= $(INCSEARCH)
+
+TOP			= ../../../../.
+CURRENT_DIR		= ./ncarg2d/src/libncarg_gks/awi
+
+BINDIR			= bin
+LIBDIR			= lib
+INCDIR			= include
+MANDIR			= man
+DOCDIR			= doc
+NGTMPDIR		= tmp
+CONFIGDIR		= config
+
+MANLPATH		= $(MANPATH)/manl
+MAN1PATH		= $(MANPATH)/man1
+MAN3PATH		= $(MANPATH)/man3
+MAN5PATH		= $(MANPATH)/man5
+MAN6PATH		= $(MANPATH)/man6
+MAN8PATH		= $(MANPATH)/man8
+
+MANL_SECTION		= l
+MAN1_SECTION		= 1
+MAN3_SECTION		= 3
+MAN5_SECTION		= 5
+MAN6_SECTION		= 6
+MAN8_SECTION		= 8
+
+CONFIG_DIR		= $(CONFIGSRC)
+
+XLIB			= -lXpm -lX11 -lXext
+EXTENSIONLIB		= -lXext
+XTOOLLIB		= -lXt -lSM -lICE
+XMULIB			= -lXmu
+XAWLIB			= -lXaw
+XMOTIFLIB		= -lXm
+
+XMOTIFCLIENTLIBS	= $(XMOTIFLIB) $(XTOOLLIB) $(XLIB)
+XATHENACLIENTLIBS	= $(XAWLIB) $(XTOOLLIB) $(EXTENSIONLIB) $(XLIB)
+XMUATHENACLIENTLIBS	= $(XAWLIB) $(XMULIB) $(XTOOLLIB) $(EXTENSIONLIB) $(XLIB)
+
+CTOFLIBS	= -lgfortran -lquadmath
+CTOFLIBSUSER	= -lgfortran -lquadmath
+MAKE		= make
+
+CC		= gcc
+CC_LD		= gcc
+CDYNAMIC	=
+CSTATIC		=
+
+CCOPTIONS	= -ansi -fPIC -m64 -Wall -fopenmp -std=c99 $(EXTRA_CCOPTIONS)
+
+BUILDINCDIR	= $(TOP)/include
+
+BUILDINCTOP	= ./..
+
+_LIBROOTSEARCH	=	-L$(LIBROOT)
+_EXECLIBSEARCH	=	$(RPATHFLAG)$(TOP)/shared:$(LIBROOT)
+_SHLIBSEARCH	=	-rpath $(TOP)/shared:$(LIBROOT)
+
+_INCROOTSEARCH	=	-I$(INCROOT)
+
+SHAREDLIBFLAGS =
+
+TOP_INCLUDES	= -I$(BUILDINCDIR)
+LDLIBS		= $(_LIBROOTSEARCH) $(LIB_SEARCH) $(EXTRA_LIBS)
+CC_LDOPTIONS	= $(CCOPTIONS) $(COPT) $(XTRA_CLDFLAGS) $(SHAREDLIBFLAGS)
+FC_LDOPTIONS	= $(FCOPTIONS) $(FOPT) $(XTRA_FLDFLAGS) $(SHAREDLIBFLAGS)
+
+EXTRA_LDLIBS	= $(SYS_LIBS) $(EXTRA_SYS_LIBS) $(DEV_SYS_LIBS)
+
+ALLINCLUDES	= $(EXTRA_INCLUDES) $(TOP_INCLUDES) $(INC_SEARCH)
+STD_DEFINES	= -DSYSV -D_POSIX_SOURCE -D_XOPEN_SOURCE -DByteSwapped -D__UNIXOS2__ -D_DARWIN_C_SOURCE
+XTRA_CDEFINES	= $(EXTRA_CDEFINES) $(EXTRA_DEFINES)
+ALLDEFINES	= $(ALLINCLUDES) $(DEV_DEFINES) $(XTRA_CDEFINES) $(STD_DEFINES) $(PROJECTDEFINES) $(DEFINES)
+CFLAGS		= $(CCOPTIONS) $(COPT) $(ALLDEFINES)
+XTRA_CLDFLAGS	= $(EXTRA_CLDFLAGS) $(EXTRA_LDFLAGS)
+EXTRA_SYS_LIBS	=
+EXTRA_EXPORT_FLAGS =
+
+DEPEND		= makedepend
+CPP		= '/usr/bin/cpp -traditional'
+FCPP		= $(CONFIG_DIR)/fcpp $(CPP)
+
+F77		= gfortran
+F77_LD		= gfortran
+FCOPTIONS	= -fPIC -fno-range-check -m64 -Wall -fopenmp $(EXTRA_FCOPTIONS)
+NGCALLF = reg\#\#_
+
+EXE_SUFFIX	=
+
+XTRA_FDEFINES	= $(EXTRA_FDEFINES) $(EXTRA_DEFINES)
+FFLAGS	= $(FCOPTIONS) $(FOPT) $(XTRA_FDEFINES)
+XTRA_FLDFLAGS	= $(EXTRA_FLDFLAGS) $(EXTRA_LDFLAGS)
+
+LD		= ld
+LD_REL		= ld
+RPATHFLAG	= -Wl,-rpath,
+AR		= ar
+AR_SRC		= ar
+AR_SRC_QUICK	= $(AR_SRC) q
+AR_SRC_CHECK	= $(AR_SRC) vru
+AR_REG		= $(AR) vru
+AR_QUICK	= $(AR) q
+
+RM		= rm -f
+LEX		= flex
+YACC		= yacc
+LEXLIB		= -ll
+CAT		= cat
+CP		= cp
+MV		= mv -f
+LN		= ln -s
+RANLIB		= ranlib
+NO_OPT		= touch -c
+TBL		= tbl
+NROFF		= nroff -man
+COL		= col
+
+LINT		= lint
+INSTALL		= $(CONFIG_DIR)/ymake-install -c
+INSTALL_RM	= $(RM)
+
+INSTALL_BIN	= 0755
+INSTALL_MAN	= 0644
+INSTALL_DOC	= 0644
+INSTALL_APP	= 0644
+INSTALL_LIB	= 0644
+INSTALL_DB	= 0644
+INSTALL_INC	= 0644
+
+CONFIGSRC	= $(TOP)/$(CONFIGDIR)
+NEWCONFIGSRC	= ../$(CONFIGSRC)
+
+_YMAKE_EXTRA	=
+
+YMAKE		= $(CONFIGSRC)/ymake -config $(CONFIGSRC) $(_YMAKE_EXTRA)
+NEWYMAKE	= $(NEWCONFIGSRC)/ymake -config $(NEWCONFIGSRC) $(_YMAKE_EXTRA)
+YMAKEDEP	= $(CONFIGSRC)/ymake-filter
+
+SHELL		= /bin/sh
+CALLCONV	= $(CONFIG_DIR)/callconv
+MKDIRHIER	= mkdir -p
+
+# ########################################################################
+#
+# Including Project file
+#
+# ########################################################################
+
+NGVERSION       = 6.4.0
+NCLVERSION      = 6.4.0
+
+NCARGDIR		= ncarg
+HLUDIR			= hlu
+HLUEXDIR		= hluex
+NCLDIR			= ncl
+NCLEXDIR		= nclex
+PYNGLEXDIR		= pynglex
+PYNGLDIR		= PyNGL
+NGODIR			= ngo
+NFPDIR			= nfp
+NFPFORTDIR		= nfpfort
+DATADIR			= data
+GRIB2CODETABLEDIR	= grib2_codetables
+DBDIR			= database
+FONTCAPDIR		= fontcaps
+GRAPHCAPDIR		= graphcaps
+EXAMPLESDIR		= examples
+TUTORIALDIR		= tutorial
+TESTSDIR		= tests
+RESDIR			= resfiles
+ROBJDIR			= robj
+WWWDIR			= ngwww
+XAPPDIR			= xapp
+
+LIBNCARGROOT		= $(LIBROOT)/$(NCARGDIR)
+CONFIGROOT		= $(LIBNCARGROOT)/$(CONFIGDIR)
+DBROOT			= $(LIBNCARGROOT)/$(DBDIR)
+FONTCAPROOT		= $(LIBNCARGROOT)/$(FONTCAPDIR)
+GRAPHCAPROOT		= $(LIBNCARGROOT)/$(GRAPHCAPDIR)
+DATAROOT		= $(LIBNCARGROOT)/$(DATADIR)
+DOCROOT			= $(LIBNCARGROOT)/$(DOCDIR)
+EXAMPLESROOT		= $(LIBNCARGROOT)/$(EXAMPLESDIR)
+ROBJROOT		= $(LIBNCARGROOT)/$(ROBJDIR)
+TESTSROOT		= $(LIBNCARGROOT)/$(TESTSDIR)
+TUTORIALROOT		= $(LIBNCARGROOT)/$(TUTORIALDIR)
+WWWROOT			= $(LIBNCARGROOT)/$(WWWDIR)
+XAPPROOT		= $(LIBNCARGROOT)/$(XAPPDIR)
+HLUEXROOT		= $(LIBNCARGROOT)/$(HLUEXDIR)
+RESFILEROOT		= $(LIBNCARGROOT)/$(RESDIR)
+NCLEXROOT		= $(LIBNCARGROOT)/$(NCLEXDIR)
+GRIB2CODETABLEROOT	= $(LIBNCARGROOT)/$(GRIB2CODETABLEDIR)
+LIBNCARGPATH		= $(LIBPATH)/$(NCARGDIR)
+CONFIGPATH		= $(LIBNCARGPATH)/$(CONFIGDIR)
+DBPATH			= $(LIBNCARGPATH)/$(DBDIR)
+FONTCAPPATH		= $(LIBNCARGPATH)/$(FONTCAPDIR)
+GRAPHCAPPATH		= $(LIBNCARGPATH)/$(GRAPHCAPDIR)
+DATAPATH		= $(LIBNCARGPATH)/$(DATADIR)
+DOCPATH			= $(LIBNCARGPATH)/$(DOCDIR)
+EXAMPLESPATH		= $(LIBNCARGPATH)/$(EXAMPLESDIR)
+ROBJPATH		= $(LIBNCARGPATH)/$(ROBJDIR)
+TESTSPATH		= $(LIBNCARGPATH)/$(TESTSDIR)
+TUTORIALPATH		= $(LIBNCARGPATH)/$(TUTORIALDIR)
+WWWPATH			= $(LIBNCARGPATH)/$(WWWDIR)
+XAPPPATH		= $(LIBNCARGPATH)/$(XAPPDIR)
+LIBNCLPATH		= $(LIBNCARGPATH)/$(NCLDIR)
+HLUEXPATH		= $(LIBNCARGPATH)/$(HLUEXDIR)
+RESFILEPATH		= $(LIBNCARGPATH)/$(RESDIR)
+NCLEXPATH		= $(LIBNCARGPATH)/$(NCLEXDIR)
+NCARGINCPATH		= $(INCPATH)/$(NCARGDIR)
+HLUINCPATH		= $(NCARGINCPATH)/$(HLUDIR)
+NCLINCPATH		= $(NCARGINCPATH)/$(NCLDIR)
+NGOINCPATH		= $(NCARGINCPATH)/$(NGODIR)
+PYNGLDOCPATH		= webdoc/pyngl
+PYNGLBINPATH		= $(PYTHONBINDIR)
+PYNGLNCARGPATH		= $(PYTHONPKGSDIR)/$(PYNGLDIR)/$(NCARGDIR)
+USRRESFILE		= "~/.hluresfile"
+NCARGURL		= "ngurl"
+NCARGSITEFILE   = "ncargsite"
+
+ROOTPATHCHECK		= "/lib/ncarg/fontcaps/font1"
+
+NGENV_DESCRIPT	=  		{"tmp","TMPDIR",NULL,"$(TMPROOT)",NULL,	 		"fontcap","FONTCAP",NULL,NULL,NULL,		 		"graphcap","GRAPHCAP",NULL,NULL,NULL,		 		"root",NULL,NULL,"$(ROOTPATH)",$(ROOTPATHCHECK), 		"usrresfile",NULL,NULL,$(USRRESFILE),NULL,	 		"gks_output",NULL,NULL,"gmeta",NULL,		 		"bin",NULL,"root",NULL,NULL,			 		"lib",NULL,"root",NULL,NULL,			 		"include",NULL,"root",NULL,NULL,		 		"man",NULL,"root",NULL,NULL,			 		"ncarg",NULL,"lib",NULL,NULL,			 		"config",NULL,"ncarg",NULL,NULL,		 		"data",NULL,"ncarg",NULL,NULL,			 		"database",NULL,"ncarg",NULL,NULL,		 		"doc",NULL,"ncarg",NULL,NULL,			 		"fontcaps",NULL,"ncarg",NULL,NULL,		 		"graphcaps",NULL,"ncarg",NULL,NULL,		 		"colormaps",NULL,"ncarg",NULL,NULL,		 		"rangs","NCARG_RANGS","database",NULL,NULL,	 		"udunits","NCARG_UDUNITS","ncarg",NULL,NULL,	 		"psadilookup","PSADILOOKUP_PATH",NULL,NULL,NULL, 		"examples",NULL,"ncarg",NULL,NULL,		 		"hluex",NULL,"ncarg",NULL,NULL,			 		"nclex",NULL,"ncarg",NULL,NULL,			 		"pynglex",NULL,"ncarg",NULL,NULL,		 		"resfiles",NULL,"ncarg",NULL,NULL,		 		"tests",NULL,"ncarg",NULL,NULL,			 		"tutorial",NULL,"ncarg",NULL,NULL,		 		"xapp",NULL,"ncarg",NULL,NULL,			 		"ngwww",NULL,"ncarg",NULL,NULL,			 		"ngurl",NULL,"ngwww",NULL,NULL,			 		"sysresfile",NULL,"ncarg",NULL,NULL,		 		"sysappres",NULL,"ncarg",NULL,NULL,		 		"grib2_codetables","NIO_GRIB2_CODETABLES","ncarg",NULL,NULL,  		"ftfonts",NULL,"database",NULL,NULL,             		NULL}
+
+NGENVDEF	=	-DENV_DEFS=$(NGENV_DESCRIPT)
+
+COMMONSRC	= $(TOP)/common/src
+NCARG2DSRC	= $(TOP)/ncarg2d/src
+NGMATHSRC	= $(TOP)/ngmath/src
+NGMATHLIBSRC= $(NGMATHSRC)/lib
+NVIEWSRC	= $(TOP)/ncarview/src
+NVIEWBINSRC	= $(NVIEWSRC)/bin
+NVIEWLIBSRC	= $(NVIEWSRC)/lib
+NISRC		= $(TOP)/ni/src
+NIBINSRC	= $(NISRC)/bin
+NILIBSRC	= $(NISRC)/lib
+EXTERNALSRC	= $(TOP)/external
+PYNIOSRC        = $(TOP)/pynio
+NCARGCLIBSRC	= $(COMMONSRC)/libncarg_c
+NCARGLIBSRC	= $(NCARG2DSRC)/libncarg
+NCARGGKSLIBSRC	= $(NCARG2DSRC)/libncarg_gks
+NCARGOPTLIBSRC	= $(NCARG2DSRC)/liboptional
+CGMLIBSRC	= $(NVIEWLIBSRC)/libcgm
+CTRANSLIBSRC	= $(NVIEWLIBSRC)/libctrans
+ICTRANSLIBSRC	= $(NVIEWLIBSRC)/libictrans
+NCARGRASLIBSRC	= $(NVIEWLIBSRC)/libncarg_ras
+HLULIBSRC	= $(NILIBSRC)/hlu
+BLASSRC	        = $(EXTERNALSRC)/blas
+LAPACKSRC       = $(EXTERNALSRC)/lapack
+SPHERESRC	= $(EXTERNALSRC)/sphere3.1_dp
+FFTPACK5SRC	= $(EXTERNALSRC)/fftpack5_dp
+NGOLIBSRC	= $(NILIBSRC)/ngo
+XCBLIBSRC	= $(NILIBSRC)/xcb
+NFPLIBSRC	= $(NILIBSRC)/nfp
+NFPFORTLIBSRC	= $(NILIBSRC)/nfpfort
+NCLLIBSRC	= $(NISRC)/ncl
+NIOLIBSRC	= $(NILIBSRC)/nio
+
+NCARGCLIB	= -L$(NCARGCLIBSRC) -lncarg_c
+NCARGLIB	= -L$(NCARGLIBSRC) -lncarg
+NCARGGKSLIB	= -L$(NCARGGKSLIBSRC) -lncarg_gks
+NCARGGKSXQFLIB	= -L$(NCARGGKSLIBSRC) -lncarg_gks_xq_fix
+NGMATHLIB	= -L$(NGMATHLIBSRC) -lngmath
+CGMLIB		= -L$(CGMLIBSRC) -lcgm
+NCARGRASLIB	= -L$(NCARGRASLIBSRC) -lncarg_ras
+HLULIB		= -L$(HLULIBSRC) -lhlu
+NGOLIB		= -L$(NGOLIBSRC) -lngo
+NFPLIB		= -L$(NFPLIBSRC) -lnfp
+NFPFORTLIB	= -L$(NFPFORTLIBSRC) -lnfpfort
+NIOLIB		= -L$(NIOLIBSRC) -lnio
+XCBLIB		= -L$(XCBLIBSRC) -lXcb
+NCLLIB		= -L$(NCLLIBSRC) -lncl
+NCLAPILIB	= -L$(NCLLIBSRC) -lnclapi
+BLASLIB         = -L$(BLASSRC) -lblas_ncl
+LAPACKLIB       = -L$(LAPACKSRC) -llapack_ncl
+SPHERELIB	= -L$(SPHERESRC) -lsphere3.1_dp
+FFTPACK5LIB	= -L$(FFTPACK5SRC) -lfftpack5_dp
+
+CTRANSLIB	= $(CTRANSLIBSRC)/libctrans.o
+ICTRANS_LIB	= $(ICTRANSLIBSRC)/libictrans_.o
+
+DEPNCARGCLIB	= $(NCARGCLIBSRC)/libncarg_c.a
+DEPNCARGLIB	= $(NCARGLIBSRC)/libncarg.a
+DEPNCARGGKSLIB	= $(NCARGGKSLIBSRC)/libncarg_gks.a
+DEPNCARGGKSXQFLIB= $(NCARGGKSLIBSRC)/libncarg_gks_xq_fix.a
+DEPNGMATHLIB	= $(NGMATHLIBSRC)/libngmath.a
+DEPCGMLIB	= $(CGMLIBSRC)/libcgm.a
+DEPNCARGRASLIB	= $(NCARGRASLIBSRC)/libncarg_ras.a
+DEPHLULIB	= $(HLULIBSRC)/libhlu.a
+DEPNGOLIB	= $(NGOLIBSRC)/libngo.a
+DEPNFPLIB	= $(NFPLIBSRC)/libnfp.a
+DEPNFPFORTLIB	= $(NFPFORTLIBSRC)/libnfpfort.a
+DEPNIOLIB	= $(NIOLIBSRC)/libnio.a
+DEPNCLLIB	= $(NCLLIBSRC)/libncl.a
+DEPNCLAPILIB	= $(NCLLIBSRC)/libnclapi.a
+
+DEPCTRANSLIB	= $(CTRANSLIB)
+DEPICTRANS_LIB	= $(ICTRANS_LIB)
+
+ICTRANSLIB	= $(ICTRANSLIBSRC)/libictrans.o
+DEPICTRANSLIB	= $(ICTRANSLIB)
+
+NCARGLIBS	= $(NCARGLIB) $(NCARGGKSLIB) $(NCARGCLIB)
+NCARGXQFLIBS	= $(NCARGLIB) $(NCARGGKSXQFLIB) $(NCARGCLIB)
+NGMATHLIBS	= $(NGMATHLIB)
+HLULIBS		= $(HLULIB)
+NCLLIBS		= $(NCLAPILIB)
+NFPLIBS		= $(NFPLIB) $(NFPFORTLIB)
+NIOLIBS		= $(NIOLIB)
+EXTERNALLIBS    = $(SPHERELIB) $(FFTPACK5LIB) $(LAPACKLIB) $(BLASLIB)
+
+DEPNCARGLIBS	= $(DEPNCARGLIB) $(DEPNCARGGKSLIB) $(DEPNCARGCLIB)
+DEPNCARGXQFLIBS	= $(DEPNCARGLIB) $(DEPNCARGGKSXQFLIB) $(DEPNCARGCLIB)
+DEPHLULIBS	= $(DEPHLULIB)
+DEPNCLLIBS	= $(DEPHLULIB) $(DEPNCLAPILIB)
+DEPNFPLIBS	= $(DEPNFPLIB) $(DEPNFPFORTLIB)
+DEPNIOLIBS	= $(DEPNIOLIB)
+
+GRAPHCSRC	= $(COMMONSRC)/graphcap
+FONTCSRC	= $(COMMONSRC)/fontcap
+
+GRAPHC		= $(GRAPHCSRC)/graphc
+FONTC		= $(FONTCSRC)/fontc
+IFTRAN      = $(NCARGLIBSRC)/Iftran/Iftran
+FSPLIT      = $(NCARGLIBSRC)/Iftran/Fsplit
+NYACC      = $(NISRC)/nyacc/nyacc
+
+NETCDFLIB	=
+
+NCDFLIBS	=
+PNGLIB		= -lpng -lz
+CAIROLIB	= -lcairo -lXrender -lfontconfig -lpixman-1 -lfreetype -lexpat -lpng -lz -liconv -lbz2
+CAIROLIBUSER	= -lcairo -lXrender -lfontconfig -lpixman-1 -lfreetype -lexpat -lpng -lz -liconv -lbz2
+HDFLIB		= -lmfhdf -ldf -ljpeg -lz
+NETCDF4LIB      =
+HDFEOSLIB	=
+HDFEOS5LIB	=
+HDF5LIB		=
+GDALLIB		=
+GRIB2LIB	=
+EEMDLIB		= -lgsl -lgslcblas
+UDUNITSLIB	=
+V5DLIB      	=
+OpenCLLIB	= OpenCLlib
+GRIDSPECLIB     =
+XDRLIB		=
+HDFDEFINES	= -DDARWIN
+VDEFINE		= -DNGVERSION='"$(NGVERSION)"'  -DNCLVERSION='"$(NCLVERSION)"'
+PROJECTDEFINES	= -DNeedFuncProto
+GKS_BUFFER_SIZE	= 0
+PERL = /bin/perl
+NCLWEBROOT      = /web/ncl
+PYNGLWEBROOT      = /web/pyngl
+
+# ########################################################################
+#
+# After Including Project file
+#
+# ########################################################################
+
+# ########################################################################
+#
+# Including Rules file
+#
+# ########################################################################
+
+# ########################################################################
+#
+# After Including Rules file
+#
+# ########################################################################
+
+.SUFFIXES: .f.sed .xml .shtml
+
+.f.sed.o:
+	@$(FCPP) $< $*.f
+	$(F77) $(FFLAGS) -c $*.f
+	@$(RM) $*.f
+
+# ########################################################################
+#
+#	local y(mM)akefile is included HERE.
+#
+# ########################################################################
+
+#
+#	$Id: yMakefile,v 1.27 2010-03-16 01:59:21 haley Exp $
+#
+
+MYNAME	= awi
+
+GENERIC_SRCS = gactm.f   gacwk.f   gaspar.f  gatelm.f  gca.f     gcelcd.f  gceldc.f  gceldr.f  gclks.f   gclrwk.f  gclsg.f   gclwk.f   gcrsg.f   gcsgwk.f  gdawk.f   gdsg.f    geclks.f  gelms.f   genneg.f  gerhnd.f  gerlog.f  gesc.f    gescfn.f  gevtm.f   gfa.f     gfilat.f  ggdp.f    ggtitm.f  giitm.f   ginst.f   gksbd.f   gmarat.f  gninst.f  gnpart.f  gopdec.f  gopks.f   gopwk.f   gpl.f     gpm.f     gpolat.f  gprec.f   gputpt.f  gqacwk.f  gqasf.f   gqcf.f    gqchb.f   gqchh.f   gqchsp.f  gqchup.f  gqchw.f   gqchxp.f  gqclip.f  gqcntn.f  gqcr.f    gqdsp.f   gqeci.f   gqegdp.f  gqentn.f  gqewk.f   gqfaci.f  gqfaf.f   gqfai.f   gqfais.f  gqfasi.f  gqgdp.f   gqln.f    gqlvks.f  gqlwk.f   gqlwsc.f  gqmk.f    gqmksc.f  gqmntn.f  gqnt.f    gqops.f   gqopsg.f  gqopwk.f  gqpa.f    gqpaf.f   gqparf.f  gqpcr.f   gqpfar.f  gqplci.f  gqplf.f   gqpli.f   gqpmci.f  gqpmf.f   gqpmi.f   gqppar.f  gqpplr.f  gqppmr.f  gqptxr.f  gqpx.f    gqpxa.f   gqpxad.f  gqsgus.f  gqtxal.f  gqtxci.f  gqtxf.f   gqtxfp.f  gqtxi.f   gqtxp.f   gqtxx.f   gqwkc.f   gqwkca.f  gqwkcl.f  gqwkdu.f  gqwks.f   gqwkt.f   grditm.f  grqst.f   gsasf.f   gschh.f   gschsp.f  gschup.f  gschxp.f  gsclip.f  gscr.f    gsegdt.f  gsegrd.f  gselnt.f  gsfaci.f  gsfai.f   gsfais.f  gsfasi.f  gskpop.f  gsln.f    gslwsc.f  gsmk.f    gsmksc.f  gspa.f    gsparf.f  gsplci.f  gspli.f   gspmci.f  gspmi.f   gssgt.f   gsstm.f   gstxal.f  gstxci.f  gstxfp.f  gstxi.f   gstxp.f   gsvp.f    gswkvp.f  gswkwn.f  gswn.f    gtflt.f   gtx.f     gtxdrw.f  gtxtat.f  gurec.f   guwk.f    gwitm.f   gxlate.f  gxmdef.f  gxopdf.f  gzckst.f  gzckwk.f  gzclli.f  gzclpo.f  gzcpwk.f  gzfmwk.f  gzgte1.f  gzgte2.f  gzines.f  gzinsl.f  gziqwk.f  gzn2wx.f  gzn2wy.f  gzname.f  gznume.f  gzputr.f  gzputs.f  gzreop.f  gzroi.f   gzsrat.f  gzusat.f  gztowk.f  gzw2gk.f  gzw2nx.f  gzw2ny.f  gzxid.f   gzacwk.f  gzclwk.f  gzclrwk.f gzdawk.f  gzopwk.f
+
+GENERIC_OBJS = gactm.o   gacwk.o   gaspar.o  gatelm.o  gca.o     gcelcd.o  gceldc.o  gceldr.o  gclks.o   gclrwk.o  gclsg.o   gclwk.o   gcrsg.o   gcsgwk.o  gdawk.o   gdsg.o    geclks.o  gelms.o   genneg.o  gerhnd.o  gerlog.o  gesc.o    gescfn.o  gevtm.o   gfa.o     gfilat.o  ggdp.o    ggtitm.o  giitm.o   ginst.o   gksbd.o   gmarat.o  gninst.o  gnpart.o  gopdec.o  gopks.o   gopwk.o   gpl.o     gpm.o     gpolat.o  gprec.o   gputpt.o  gqacwk.o  gqasf.o   gqcf.o    gqchb.o   gqchh.o   gqchsp.o  gqchup.o  gqchw.o   gqchxp.o  gqclip.o  gqcntn.o  gqcr.o    gqdsp.o   gqeci.o   gqegdp.o  gqentn.o  gqewk.o   gqfaci.o  gqfaf.o   gqfai.o   gqfais.o  gqfasi.o  gqgdp.o   gqln.o    gqlvks.o  gqlwk.o   gqlwsc.o  gqmk.o    gqmksc.o  gqmntn.o  gqnt.o    gqops.o   gqopsg.o  gqopwk.o  gqpa.o    gqpaf.o   gqparf.o  gqpcr.o   gqpfar.o  gqplci.o  gqplf.o   gqpli.o   gqpmci.o  gqpmf.o   gqpmi.o   gqppar.o  gqpplr.o  gqppmr.o  gqptxr.o  gqpx.o    gqpxa.o   gqpxad.o  gqsgus.o  gqtxal.o  gqtxci.o  gqtxf.o   gqtxfp.o  gqtxi.o   gqtxp.o   gqtxx.o   gqwkc.o   gqwkca.o  gqwkcl.o  gqwkdu.o  gqwks.o   gqwkt.o   grditm.o  grqst.o   gsasf.o   gschh.o   gschsp.o  gschup.o  gschxp.o  gsclip.o  gscr.o    gsegdt.o  gsegrd.o  gselnt.o  gsfaci.o  gsfai.o   gsfais.o  gsfasi.o  gskpop.o  gsln.o    gslwsc.o  gsmk.o    gsmksc.o  gspa.o    gsparf.o  gsplci.o  gspli.o   gspmci.o  gspmi.o   gssgt.o   gsstm.o   gstxal.o  gstxci.o  gstxfp.o  gstxi.o   gstxp.o   gsvp.o    gswkvp.o  gswkwn.o  gswn.o    gtflt.o   gtx.o     gtxdrw.o  gtxtat.o  gurec.o   guwk.o    gwitm.o   gxlate.o  gxmdef.o  gxopdf.o  gzckst.o  gzckwk.o  gzclli.o  gzclpo.o  gzcpwk.o  gzfmwk.o  gzgte1.o  gzgte2.o  gzines.o  gzinsl.o  gziqwk.o  gzn2wx.o  gzn2wy.o  gzname.o  gznume.o  gzputr.o  gzputs.o  gzreop.o  gzroi.o   gzsrat.o  gzusat.o  gztowk.o  gzw2gk.o  gzw2nx.o  gzw2ny.o  gzxid.o   gzacwk.o  gzclwk.o  gzclrwk.o gzdawk.o  gzopwk.o
+
+SOURCES = $(GENERIC_SRCS)
+OBJECTS = $(GENERIC_OBJS)
+
+ROBJ_SRC = ggkwdr_stub.c
+ROBJ_OBJ = ggkwdr_stub.o
+
+all::
+
+all-local::../libncarg_gks.a
+
+../libncarg_gks.a:: $(OBJECTS)
+	$(AR_REG) ../libncarg_gks.a $(OBJECTS)
+
+all::
+
+clean-local::
+	-@$(RM) $(OBJECTS)
+
+all::
+
+all-local::../libbasegks.a
+
+../libbasegks.a:: $(OBJECTS)
+	$(AR_REG) ../libbasegks.a $(OBJECTS)
+
+all::
+
+clean-local::
+	-@$(RM) $(OBJECTS)
+
+all::
+
+depend-local:: $(ROBJ_SRC)
+	$(DEPEND) -s "# DO NOT DELETE" -- $(ALLDEFINES) -- $(ROBJ_SRC)
+all::
+
+all-local:: $(ROBJ_OBJ)
+
+install-local:: $(ROBJ_OBJ)
+	@if (test ! -d $(ROBJPATH)); then ($(MKDIRHIER) $(ROBJPATH)); fi
+	@for name in $(ROBJ_OBJ); do \
+	if (test -f $$name.$(EXE_SUFFIX)) then \
+	(echo "Installing $$name.$(EXE_SUFFIX)";\
+	$(INSTALL) -m $(INSTALL_LIB) $$name.$(EXE_SUFFIX) $(ROBJPATH));\
+	else \
+	(echo "Installing $$name";\
+	$(INSTALL) -m $(INSTALL_LIB) $$name $(ROBJPATH)); fi \
+	done
+
+all::
+
+clean-local::
+	-@$(RM) $(ROBJ_OBJ)
+
+all::	ggkwdr_stub.o
+
+gacwk.o : gkscom.h
+gaspar.o : trstat.h trpars.h trinst.h
+gatelm.o : trinst.h trcode.h
+gca.o : gkscom.h
+gcelcd.o : trinst.h trpars.h trstat.h trcode.h gkscom.h
+gceldc.o : trinst.h
+gceldr.o : trpars.h gkscom.h ../bwi/g01io.h
+gclks.o : gkscom.h
+gclrwk.o : gkscom.h
+gclsg.o : gkscom.h
+gclwk.o : gkscom.h
+gcrsg.o : gkscom.h
+gcsgwk.o : gkscom.h trstat.h
+gdawk.o : gkscom.h
+gdsg.o : gkscom.h
+geclks.o : gkscom.h
+gelms.o : trinst.h trcode.h
+gerhnd.o : gkscom.h
+gerlog.o : gkscom.h
+gesc.o : gkscom.h trstat.h
+gescfn.o : trinst.h trpars.h
+gevtm.o : gevtm.f
+gfa.o : gkscom.h
+gfilat.o : trinst.h trstat.h trpars.h trcode.h
+ggdp.o : gkscom.h
+ggtitm.o : gkscom.h
+giitm.o : gkscom.h
+ginst.o : ginst.f
+gksbd.o : gkscom.h
+gmarat.o : gkscom.h trinst.h trstat.h trpars.h trcode.h
+gninst.o : trpars.h trinst.h trbufr.h
+gnpart.o : trpars.h trinst.h trbufr.h
+gopdec.o : trbufr.h
+gopks.o : gkscom.h
+gopwk.o : gkscom.h
+gpl.o : gkscom.h
+gpm.o : gkscom.h
+gpolat.o : trcode.h trinst.h trstat.h trpars.h
+gputpt.o : trpars.h trinst.h trbufr.h gkscom.h ../bwi/g01io.h
+gqacwk.o : gkscom.h
+gqasf.o : gkscom.h
+gqcf.o : gkscom.h
+gqchb.o : gkscom.h
+gqchh.o : gkscom.h
+gqchsp.o : gkscom.h
+gqchup.o : gkscom.h
+gqchw.o : gkscom.h
+gqchxp.o : gkscom.h
+gqclip.o : gkscom.h
+gqcntn.o : gkscom.h
+gqcr.o : gkscom.h
+gqdsp.o : gkscom.h
+gqeci.o : gkscom.h
+gqegdp.o : gkscom.h
+gqentn.o : gkscom.h
+gqewk.o : gkscom.h
+gqfaci.o : gkscom.h
+gqfaf.o : gkscom.h
+gqfai.o : gkscom.h
+gqfais.o : gkscom.h
+gqfasi.o : gkscom.h
+gqgdp.o : gkscom.h
+gqln.o : gkscom.h
+gqlvks.o : gkscom.h
+gqlwk.o : gkscom.h
+gqlwsc.o : gkscom.h
+gqmk.o : gkscom.h
+gqmksc.o : gkscom.h
+gqmntn.o : gkscom.h
+gqnt.o : gkscom.h
+gqops.o : gkscom.h
+gqopsg.o : gkscom.h
+gqopwk.o : gkscom.h
+gqpa.o : gkscom.h
+gqpaf.o : gkscom.h
+gqparf.o : gkscom.h
+gqpcr.o : gkscom.h
+gqpfar.o : gkscom.h
+gqplci.o : gkscom.h
+gqplf.o : gkscom.h
+gqpli.o : gkscom.h
+gqpmci.o : gkscom.h
+gqpmf.o : gkscom.h
+gqpmi.o : gkscom.h
+gqppar.o : gkscom.h
+gqpplr.o : gkscom.h
+gqppmr.o : gkscom.h
+gqptxr.o : gkscom.h
+gqpx.o : gkscom.h
+gqpxa.o : gkscom.h
+gqpxad.o : gkscom.h
+gqsgus.o : gkscom.h
+gqtxal.o : gkscom.h
+gqtxci.o : gkscom.h
+gqtxf.o : gkscom.h
+gqtxfp.o : gkscom.h
+gqtxi.o : gkscom.h
+gqtxp.o : gkscom.h
+gqtxx.o : gkscom.h
+gqwkc.o : gkscom.h
+gqwkca.o : gqwkca.f     gkscom.h
+
+gqwkcl.o : gqwkcl.f     gkscom.h
+
+gqwkdu.o : gqwkdu.f     gkscom.h
+
+gqwks.o : gqwks.f     gkscom.h
+
+gqwkt.o : gqwkt.f     gkscom.h
+
+grditm.o : grditm.f     gkscom.h
+
+grqst.o : grqst.f
+
+gsasf.o : gsasf.f     gkscom.h
+
+gschh.o : gschh.f     gkscom.h
+
+gschsp.o : gschsp.f     gkscom.h
+
+gschup.o : gschup.f     gkscom.h
+
+gschxp.o : gschxp.f     gkscom.h
+
+gsclip.o : gsclip.f     gkscom.h
+
+gscr.o : gscr.f     gkscom.h
+
+gsegdt.o : gsegdt.f     trstat.h     trbufr.h     trpars.h     trinst.h     trcode.h     trdefl.h
+
+gsegrd.o : gsegrd.f     trbufr.h     ../bwi/g01io.h     gkscom.h
+
+gselnt.o : gselnt.f     gkscom.h
+
+gsfaci.o : gsfaci.f     gkscom.h
+
+gsfai.o : gsfai.f     gkscom.h
+
+gsfais.o : gsfais.f     gkscom.h
+
+gsfasi.o : gsfasi.f     gkscom.h
+
+gskpop.o : gskpop.f     trinst.h     trbufr.h
+
+gsln.o : gsln.f     gkscom.h
+
+gslwsc.o : gslwsc.f     gkscom.h
+
+gsmk.o : gsmk.f     gkscom.h
+
+gsmksc.o : gsmksc.f     gkscom.h
+
+gspa.o : gspa.f     gkscom.h
+
+gsparf.o : gsparf.f     gkscom.h
+
+gsplci.o : gsplci.f     gkscom.h
+
+gspli.o : gspli.f     gkscom.h
+
+gspmci.o : gspmci.f     gkscom.h
+
+gspmi.o : gspmi.f     gkscom.h
+
+gssgt.o : gssgt.f     gkscom.h
+
+gsstm.o : gsstm.f
+
+gstxal.o : gstxal.f     gkscom.h
+
+gstxci.o : gstxci.f     gkscom.h
+
+gstxfp.o : gstxfp.f     gkscom.h
+
+gstxi.o : gstxi.f     gkscom.h
+
+gstxp.o : gstxp.f     gkscom.h
+
+gsvp.o : gsvp.f     gkscom.h
+
+gswkvp.o : gswkvp.f     gkscom.h
+
+gswkwn.o : gswkwn.f     gkscom.h
+
+gswn.o : gswn.f     gkscom.h
+
+gtflt.o : gtflt.f
+
+gtx.o : gtx.f     gkscom.h
+
+gtxdrw.o : gtxdrw.f     trpars.h     trinst.h     gkscom.h
+
+gtxtat.o : gtxtat.f     trstat.h     trpars.h     trinst.h     trcode.h     gkscom.h
+
+gurec.o : gurec.f
+
+guwk.o : guwk.f     gkscom.h
+
+gwitm.o : gwitm.f     gkscom.h
+
+gxlate.o : gxlate.f     trinst.h
+
+gxmdef.o : gxmdef.f     trdefl.h     trstat.h
+
+gxopdf.o : gxopdf.f     trpars.h
+
+gzacwk.o : gzacwk.f     gkscom.h
+
+gzclwk.o : gzclwk.f     gkscom.h
+
+gzclrwk.o : gzclrwk.f     gkscom.h
+
+gzdawk.o : gzdawk.f     gkscom.h
+
+gzname.o : gzname.f     gkscom.h
+
+gzckst.o : gzckst.f     gkscom.h
+
+gzckwk.o : gzckwk.f     gkscom.h
+
+gzcpwk.o : gzcpwk.f     gkscom.h
+
+gzfmwk.o : gzfmwk.f     gkscom.h
+
+gzgte1.o : gzgte1.f     gkscom.h
+
+gzgte2.o : gzgte2.f     gkscom.h
+
+gzines.o : gzines.f     gkscom.h
+
+gzinsl.o : gzinsl.f     gkscom.h
+
+gziqwk.o : gziqwk.f     gkscom.h
+
+gzn2wx.o : gzn2wx.f     gkscom.h
+
+gzn2wy.o : gzn2wy.f     gkscom.h
+
+gznume.o : gznume.f     gkscom.h
+
+gzputr.o : gzputr.f     gkscom.h
+
+gzputs.o : gzputs.f     gkscom.h
+
+gzreop.o : gzreop.f     gkscom.h
+
+gzroi.o : gzroi.f     gkscom.h
+
+gzsrat.o : gzsrat.f     gkscom.h
+
+gztowk.o : gztowk.f     gkscom.h
+
+gzusat.o : gzusat.f     gkscom.h
+
+gzw2gk.o : gzw2gk.f     gkscom.h     trbufr.h
+
+gzw2nx.o : gzw2nx.f     gkscom.h
+
+gzw2ny.o : gzw2ny.f     gkscom.h
+
+gzxid.o : gzxid.f     gkscom.h
+
+# ########################################################################
+#
+#	after local y(mM)akefile included.
+#
+# ########################################################################
+
+# ########################################################################
+#
+#	The Rest of this file is generated from the Template file.
+#
+# ########################################################################
+
+COPT	= -O
+FOPT	= -O
+
+all:: all-local
+
+clean-local::
+	@echo "cleaning in $(CURRENT_DIR)"
+
+all::
+
+clean-local::
+	-@$(RM) core Makefile.bak
+
+local-Makefile:: $(YMAKEDEP)
+
+$(YMAKEDEP):
+	@(cd $(CONFIGSRC); if (test -f Makefile) then \
+	echo "checking ymake in $(CONFIGSRC) first..."; $(MAKE) all; else \
+	echo "making ymake from Makefile.ini in $(CONFIGSRC) first..."; \
+	$(MAKE) -f Makefile.ini clean all; fi; \
+	echo "continuing in $(CURRENT_DIR)")
+
+local-Makefile::
+	@echo "Making Makefile in $(CURRENT_DIR)"
+	@$(YMAKE) -Topdir $(TOP) -Curdir $(CURRENT_DIR)
+
+me: local-Makefile
+
+all-local::
+
+install-local::
+	@echo "installing in $(CURRENT_DIR)"
+
+depend-local::
+
+includes-local::
+
+preformatted-local::
+
+install:: install-local
+
+Makefiles::
+
+includes:: includes-local
+
+depend:: depend-local
+
+clean:: clean-local
+
+dist-clean:: clean-local
+	@$(RM) Makefile
+	@echo "dist-clean in $(CURRENT_DIR)"
+
+preformatted:: preformatted-local
+

@@ -1,0 +1,19 @@
+#
+#	$Id: yMakefile,v 1.5 2010-03-17 16:06:02 haley Exp $
+#
+#ifdef BuildGDAL
+GE_SCRIPT = NCL_GETools.ncl
+#else
+#define GE_SCRIPT
+#endif
+
+CONTRIB_SCRIPTS = calendar_decode2.ncl time_axis_labels.ncl		\
+		  ut_string.ncl ut_string_fix.ncl run_cor.ncl kf_filter.ncl		\
+		  cd_string.ncl cd_inv_string.ncl calcMonAnomTXXX.ncl	\
+		  calendar_decode2_fix.ncl \
+		  clmMonTXXX.ncl nchoosek.ncl box_percentile_plot.ncl $(GE_SCRIPT)
+
+InstallTarget($(CONTRIB_SCRIPTS),$(INSTALL_LIB),$(LIBNCARGROOT)/nclscripts/contrib)
+
+
+
