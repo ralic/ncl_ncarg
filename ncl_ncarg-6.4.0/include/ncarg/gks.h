@@ -1,1 +1,0 @@
-.././.././ncarg2d/src/libncarg_gks/gks.h

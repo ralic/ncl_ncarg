@@ -1,0 +1,6 @@
+[submodule "pyngl"]
+path=pyngl
+url = https://github.com/Python3pkg/pyngl
+[submodule "pynio"]
+path=pynio
+url = https://github.com/Python3pkg/pynio

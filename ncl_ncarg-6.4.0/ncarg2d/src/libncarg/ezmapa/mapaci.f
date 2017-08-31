@@ -1,5 +1,0 @@
-      FUNCTION MAPACI (IAI)
-      INTEGER IAI
-      MAPACI=MDPACI(IAI)
-      RETURN
-      END

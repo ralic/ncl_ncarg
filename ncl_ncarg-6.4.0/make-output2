@@ -1,0 +1,14 @@
+Making ./config
+make[1]: *** No targets specified and no makefile found.  Stop.
+Making ./external
+make[1]: *** No targets specified and no makefile found.  Stop.
+Making ./common
+make[1]: *** No targets specified and no makefile found.  Stop.
+Making ./ncarg2d
+make[1]: *** No targets specified and no makefile found.  Stop.
+Making ./ngmath
+make[1]: *** No targets specified and no makefile found.  Stop.
+Making ./ncarview
+make[1]: *** No targets specified and no makefile found.  Stop.
+Making ./ni
+make[1]: *** No targets specified and no makefile found.  Stop.

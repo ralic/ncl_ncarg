@@ -65,21 +65,21 @@ FC = $(F77)
 #
 # ########################################################################
 
-YMAKEROOT		= /usr/local/Cellar/ncl_ncarg/6.4.0
-BINROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/bin
-LIBROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/lib
-INCROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/include
-MANROOT			= /usr/local/Cellar/ncl_ncarg/6.4.0/man
+YMAKEROOT		= /usr/local/Cellar/ncarg/6.4.0
+BINROOT			= /usr/local/Cellar/ncarg/6.4.0/bin
+LIBROOT			= /usr/local/Cellar/ncarg/6.4.0/lib
+INCROOT			= /usr/local/Cellar/ncarg/6.4.0/include
+MANROOT			= /usr/local/Cellar/ncarg/6.4.0/man
 TMPROOT			= /tmp
 
-ROOTPATH		= /usr/local/Cellar/ncl_ncarg/6.4.0
-BINPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/bin
-LIBPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/lib
-INCPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/include
-MANPATH			= /usr/local/Cellar/ncl_ncarg/6.4.0/man
+ROOTPATH		= /usr/local/Cellar/ncarg/6.4.0
+BINPATH			= /usr/local/Cellar/ncarg/6.4.0/bin
+LIBPATH			= /usr/local/Cellar/ncarg/6.4.0/lib
+INCPATH			= /usr/local/Cellar/ncarg/6.4.0/include
+MANPATH			= /usr/local/Cellar/ncarg/6.4.0/man
 
-LIBSEARCH		= -L/opt/X11/lib
-INCSEARCH		= -I/opt/X11/include
+LIBSEARCH		= -L/usr/local/opt/hdf5/lib
+INCSEARCH		= -I/usr/local/opt/hdf5/include
 LIBSEARCHUSER		= -L/opt/X11/lib
 INCSEARCHUSER		= -I/opt/X11/include
 PYTHONVERSION		=
@@ -418,20 +418,20 @@ NYACC      = $(NISRC)/nyacc/nyacc
 
 NETCDFLIB	=
 
-NCDFLIBS	=
+NCDFLIBS	= -lnetcdf
 PNGLIB		= -lpng -lz
 CAIROLIB	= -lcairo -lXrender -lfontconfig -lpixman-1 -lfreetype -lexpat -lpng -lz -liconv -lbz2
 CAIROLIBUSER	= -lcairo -lXrender -lfontconfig -lpixman-1 -lfreetype -lexpat -lpng -lz -liconv -lbz2
-HDFLIB		= -lmfhdf -ldf -ljpeg -lz
+HDFLIB		=
 NETCDF4LIB      =
 HDFEOSLIB	=
 HDFEOS5LIB	=
-HDF5LIB		=
+HDF5LIB		= -lhdf5_hl -lhdf5 -lsz -lz
 GDALLIB		=
 GRIB2LIB	=
-EEMDLIB		= -lgsl -lgslcblas
+EEMDLIB		=
 UDUNITSLIB	=
-V5DLIB      	=
+V5DLIB      	= V5Dlib
 OpenCLLIB	= OpenCLlib
 GRIDSPECLIB     =
 XDRLIB		=
@@ -474,7 +474,7 @@ PYNGLWEBROOT      = /web/pyngl
 #
 # ########################################################################
 
-SUBDIRS	= config common ncarg2d ngmath ncarview
+SUBDIRS	= config external common ncarg2d ngmath ncarview ni
 
 Info::
 	@echo; 	echo "	NCL/NCAR Graphics - Version $(NCLVERSION) Installation Configuration"; 	echo; 	echo "System File		"$(SYSTEM_INCLUDE); 	echo "Binary Install Directory	"$(BINPATH); 	echo "Library Install Directory	"$(LIBPATH); 	echo "Include Install Directory	"$(INCPATH); 	echo "Manpage Install Directory	"$(MANPATH); 	echo "Config Install Directory	"$(CONFIGPATH); 	echo "Data Base Directory	"$(DBPATH); 	echo "Programmer Doc Dir	"$(DOCPATH); 	echo "Reloc Obj. Directory	"$(ROBJPATH); 	echo "Examples Directory	"$(EXAMPLESPATH); 	echo "Tutorial Directory	"$(TUTORIALPATH); 	echo "Test Directory		"$(TESTSPATH); 	echo "X App. Def. Directory	"$(XAPPPATH); 	echo "f77 Compiler		"$(F77); 	echo "f77 Flags		"$(FFLAGS); 	echo "C Compiler		"$(CC); 	echo "cc Flags		"$(CFLAGS);
@@ -561,13 +561,13 @@ PYTHONVERS:
 	@echo "$(PYTHONVERSION)"
 
 NCLSTUFF:
-	@echo "n"
+	@echo "y"
 
 XSTUFF:
 	@echo "y"
 
 RASTERHDFSTUFF:
-	@echo "y"
+	@echo "n"
 
 TRIANGLESTUFF:
 	@echo "n"
@@ -588,7 +588,7 @@ HDFEOS5STUFF:
 	@echo "n"
 
 HDF5STUFF:
-	@echo "n"
+	@echo "y"
 
 OpenCLSTUFF:
 	@echo "n"
@@ -606,7 +606,7 @@ GRIB2STUFF:
 	@echo "n"
 
 EEMDSTUFF:
-	@echo "y"
+	@echo "n"
 
 V5DSTUFF:
 	@echo "n"

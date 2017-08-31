@@ -9,14 +9,19 @@
 
 #ifdef SecondSite
 
-#define YmakeRoot /usr/local/Cellar/ncl_ncarg/6.4.0
+#define YmakeRoot /usr/local/Cellar/ncarg/6.4.0
 
-#define NetCDFlib 
+#define NetCDFlib -lnetcdf
+
+#define LibSearch -L/usr/local/opt/hdf5/lib
+#define IncSearch -I/usr/local/opt/hdf5/include
 
 
 
-#define BuildNCL 0
-
+#define BuildRasterHDF 0
+#define HDFlib
+#define BuildHDF4 0
+#define HDFlib
 #define UseNetCDF4Features 0
 #define BuildNetCDF4 0
 #define NetCDF4lib
@@ -27,12 +32,10 @@
 #define HDFEOSlib
 #define BuildHDFEOS5 0
 #define HDFEOS5lib
-#define BuildHDF5 0
-#define HDF5lib
 #define BuildGRIB2 0
 #define GRIB2lib
-#define BuildV5D 0
-#define V5Dlib
+#define BuildEEMD 0
+#define EEMDlib
 
 
 #endif /* SecondSite */
